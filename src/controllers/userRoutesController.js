@@ -114,7 +114,7 @@ const refreshtoken = async ( req , res ) => {
     try {
         const refreshToken = req.headers.authorization  ;
 
-        const item = await BlackListModel.findOne( { accessToken } )  ;
+        const item = await BlackListModel.findOne( { "token" : refreshToken } )  ;
 
         if ( !item )
         {

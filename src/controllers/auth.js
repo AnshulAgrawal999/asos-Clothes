@@ -10,7 +10,7 @@ const auth = async ( req , res , next ) => {
 
     const accessToken = req.headers.authorization  ;
 
-    const item = await BlackListModel.findOne( { accessToken } )  ;
+    const item = await BlackListModel.findOne( { "token" : accessToken } )  ;
 
     if ( !item )
     {
