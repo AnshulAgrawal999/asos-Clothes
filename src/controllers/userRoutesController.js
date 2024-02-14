@@ -100,7 +100,7 @@ const logoutUser = async ( req , res ) => {
 
         const refreshToken = req.body.refreshToken  ;
 
-        await BlackListModel.insertMany( [ accessToken , refreshToken ] )  ;
+        await BlackListModel.insertMany( [ { "token" : accessToken } , { "token" : refreshToken } ] )  ;
 
         res.status(200).send( {"msg":"User has been logged out" }  )  ;
         
