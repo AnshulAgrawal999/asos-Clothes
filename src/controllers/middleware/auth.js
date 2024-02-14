@@ -1,6 +1,6 @@
 const jwt = require( 'jsonwebtoken' )  ;
 
-const { BlackListModel } = require( '../models/blackList' )  ;
+const { BlackListModel } = require( '.../models/blackList' )  ;
 
 const auth = async ( req , res , next ) => {
 
@@ -10,7 +10,8 @@ const auth = async ( req , res , next ) => {
 
     if ( !item )
     {
-        jwt.verify( token , 'prepleaf-masai', function(err, decoded) {
+        jwt.verify( token , 'prepleaf-masai', function(err, decoded) 
+        {
             if ( !err )
             {
                 req.body.email = decoded.email  ;
@@ -26,8 +27,7 @@ const auth = async ( req , res , next ) => {
     else
     {
         res.send( { "msg" : "Your are not logged in" } )  ;
-    }
-        
+    }      
 } 
 
 module.exports = { auth }  ;
