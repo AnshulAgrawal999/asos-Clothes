@@ -8,7 +8,9 @@ const dotenv = require( 'dotenv' )  ;
 
 const { userRouter } = require( './routes/userRoutes' )  ;
 
-const { auth } = require( './controllers/middleware/auth' )  ;
+const { auth } = require( './controllers/auth' )  ;
+
+const cors = require( 'cors' )  ;
 
 const app = express()  ;
 
