@@ -6,6 +6,10 @@ const jwt  = require( 'jsonwebtoken' )  ;
 
 const { BlackListModel } = require( '../models/blackList' )  ;
 
+const dotenv = require( 'dotenv' )  ;
+
+dotenv.config()  ;
+
 const registerUser = async ( req , res ) => {
 
     try {
@@ -68,9 +72,11 @@ const loginUser = async ( req , res )=>{
 
                 if( result )
                 {
-                    const token = jwt.sign( { email } , 'prepleaf-masai' )  ;
+                    const accessToken = jwt.sign( { email } , process.env.secretKey , { expiresIn: '30m' } )  ;
 
-                    res.status(200).send( {"msg":"Login successful!", token } )  ;
+                    const refreshToken = jwt.sign( { email } , process.env.secretKey , { expiresIn: '1d' } )  ;
+
+                    res.status(200).send( {"msg":"Login successful!", accessToken , refreshToken } )  ;
                 }
                 else
                 {
@@ -103,4 +109,27 @@ const logoutUser = async ( req , res ) => {
     }
 } 
 
-module.exports = { registerUser , loginUser , logoutUser }  ;
+const refreshtoken = ( req , res ) => {
+
+    try {
+        const refreshToken = req.headers.authorization  ;
+  
+        jwt.verify( refreshToken , process.env.secretKey , ( err , decoded ) => {
+            
+            if ( err ) {
+                return res.send( { "error" : err } )  ;
+            }
+        
+            const newaccessToken = jwt.sign( { email } , process.env.secretKey , { expiresIn: '30m' } )   ;
+
+            res.status(200).send({ "newaccessToken" : newaccessToken })  ;
+        });
+
+    } catch (error) {
+        res.status(400).send( { "error" : error } )  ;
+    }
+}
+
+
+
+module.exports = { registerUser , loginUser , logoutUser , refreshtoken }  ;

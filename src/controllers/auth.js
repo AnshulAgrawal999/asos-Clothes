@@ -2,6 +2,10 @@ const jwt = require( 'jsonwebtoken' )  ;
 
 const { BlackListModel } = require( '../models/blackList' )  ;
 
+const dotenv = require( 'dotenv' )  ;
+
+dotenv.config()  ;
+
 const auth = async ( req , res , next ) => {
 
     const token = req.headers.authorization  ;
@@ -10,7 +14,7 @@ const auth = async ( req , res , next ) => {
 
     if ( !item )
     {
-        jwt.verify( token , 'prepleaf-masai', function(err, decoded) 
+        jwt.verify( token , process.env.secretKey , function(err, decoded) 
         {
             if ( !err )
             {
