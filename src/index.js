@@ -8,6 +8,8 @@ const dotenv = require( 'dotenv' )  ;
 
 const { userRouter } = require( './routes/userRoutes' )  ;
 
+const { auth } = require( './controllers/middleware/auth' )  ;
+
 const app = express()  ;
 
 dotenv.config() ;
@@ -22,6 +24,18 @@ app.use( '/users' , userRouter )  ;
 app.get( '/' , ( req , res ) => {
 
     res.send( { 'msg' : 'this is the asos home page' } )  ;
+    
+} )  ;
+
+app.get( '/men' , auth , ( req , res ) => {
+
+    res.send( { 'msg' : 'this is the men page' } )  ;
+    
+} )  ;
+
+app.get( '/women' , auth , ( req , res ) => {
+
+    res.send( { 'msg' : 'this is the women page' } )  ;
     
 } )  ;
 
