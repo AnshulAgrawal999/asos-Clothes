@@ -10,12 +10,14 @@ const registerUser = async ( req , res ) => {
 
     try {
 
-        const { name , email , gender , password } = req.body  ;
+        const { email , password } = req.body  ;
 
         const user = await UserModel.findOne( { email } )  ;
 
         if( !user )
-        {
+        {   
+            if ( password.length > 7 && (/\d/.test(password) )) 
+            {
                 bcrypt.hash( password , 5 , async function(err, hash) {
                     if( err )
                     {
@@ -23,17 +25,24 @@ const registerUser = async ( req , res ) => {
                     }
                     else
                     {
-                        const newuser = new UserModel( { name , email , gender , "password" : hash } )  ;
+                        const newuser = new UserModel( req.body )  ;
+
+                        newuser.password = hash  ;
 
                         await newuser.save()  ;
 
                         res.status(200).send( { "msg" : "The new user has been registered", newuser } )  ;
                     }
                 })  ;
+            }
+            else
+            {
+                res.send( { "msg" : "password should be at least 8 characters long and contain one number" } )  ;
+            }
         }
         else
         {
-            res.send( { "msg" : "Email is unavailable( already taken )" } )  ;
+            res.send( { "msg" : "Email is already registered, go to login" } )  ;
         }
 
         
