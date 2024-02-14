@@ -8,7 +8,7 @@ userRouter.post( '/register' , registerUser )  ;
 
 userRouter.post( '/login' , loginUser )  ;
 
-userRouter.get( '/logout' , logoutUser )   ;
+userRouter.post( '/logout' , logoutUser )   ;
 
 userRouter.get( '/refreshtoken' , refreshtoken )  ;
 

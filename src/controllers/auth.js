@@ -8,13 +8,13 @@ dotenv.config()  ;
 
 const auth = async ( req , res , next ) => {
 
-    const token = req.headers.authorization  ;
+    const accessToken = req.headers.authorization  ;
 
-    const item = await BlackListModel.findOne( { token } )  ;
+    const item = await BlackListModel.findOne( { accessToken } )  ;
 
     if ( !item )
     {
-        jwt.verify( token , process.env.secretKey , function(err, decoded) 
+        jwt.verify( accessToken , process.env.refreshSecretKey , function(err, decoded) 
         {
             if ( !err )
             {

@@ -72,9 +72,9 @@ const loginUser = async ( req , res )=>{
 
                 if( result )
                 {
-                    const accessToken = jwt.sign( { email } , process.env.secretKey , { expiresIn: '30m' } )  ;
+                    const accessToken = jwt.sign( { email } , process.env.accessSecretKey , { expiresIn: '30m' } )  ;
 
-                    const refreshToken = jwt.sign( { email } , process.env.secretKey , { expiresIn: '1d' } )  ;
+                    const refreshToken = jwt.sign( { email } , process.env.refreshSecretKey , { expiresIn: '1d' } )  ;
 
                     res.status(200).send( {"msg":"Login successful!", accessToken , refreshToken } )  ;
                 }
@@ -96,11 +96,11 @@ const loginUser = async ( req , res )=>{
 
 const logoutUser = async ( req , res ) => {
     try {
-        const token = req.headers.authorization  ;
+        const accessToken = req.body.accessToken  ;
 
-        const item = new BlackListModel( { token } )  ;
+        const refreshToken = req.body.refreshToken  ;
 
-        await item.save()  ;
+        await BlackListModel.insertMany( [ accessToken , refreshToken ] )  ;
 
         res.status(200).send( {"msg":"User has been logged out" }  )  ;
         
@@ -109,21 +109,30 @@ const logoutUser = async ( req , res ) => {
     }
 } 
 
-const refreshtoken = ( req , res ) => {
+const refreshtoken = async ( req , res ) => {
 
     try {
         const refreshToken = req.headers.authorization  ;
-  
-        jwt.verify( refreshToken , process.env.secretKey , ( err , decoded ) => {
-            
-            if ( err ) {
-                return res.send( { "error" : err } )  ;
-            }
-        
-            const newaccessToken = jwt.sign( { email } , process.env.secretKey , { expiresIn: '30m' } )   ;
 
-            res.status(200).send({ "newaccessToken" : newaccessToken })  ;
-        });
+        const item = await BlackListModel.findOne( { accessToken } )  ;
+
+        if ( !item )
+        {
+            jwt.verify( refreshToken , process.env.refreshSecretKey , ( err , decoded ) => {
+            
+                if ( err ) {
+                    return res.send( { "error" : err } )  ;
+                }
+            
+                const newaccessToken = jwt.sign( { email } , process.env.accessSecretKey , { expiresIn: '30m' } )   ;
+    
+                res.status(200).send({ "newaccessToken" : newaccessToken })  ;
+            });
+        }
+        else
+        {
+            res.send( { "msg" : "Your are not logged in" } )  ;
+        }      
 
     } catch (error) {
         res.status(400).send( { "error" : error } )  ;
