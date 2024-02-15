@@ -109,12 +109,13 @@ const logoutUser = async ( req , res ) => {
     }
 } 
 
-const refreshtoken = async ( req , res ) => {
+const refreshToken = async ( req , res ) => {
+
+    const refreshToken = req.headers.authorization  ;
+
+    const item = await BlackListModel.findOne( { "token" : refreshToken } )  ;
 
     try {
-        const refreshToken = req.headers.authorization  ;
-
-        const item = await BlackListModel.findOne( { "token" : refreshToken } )  ;
 
         if ( !item )
         {
@@ -132,7 +133,7 @@ const refreshtoken = async ( req , res ) => {
         else
         {
             res.send( { "msg" : "Your are not logged in" } )  ;
-        }      
+        } 
 
     } catch (error) {
         res.status(400).send( { "error" : error } )  ;
@@ -141,4 +142,4 @@ const refreshtoken = async ( req , res ) => {
 
 
 
-module.exports = { registerUser , loginUser , logoutUser , refreshtoken }  ;
+module.exports = { registerUser , loginUser , logoutUser , refreshToken }  ;
