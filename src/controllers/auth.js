@@ -8,30 +8,36 @@ dotenv.config()  ;
 
 const auth = async ( req , res , next ) => {
 
-    const accessToken = req.headers.authorization  ;
+    try {
 
-    const item = await BlackListModel.findOne( { "token" : accessToken } )  ;
+        const accessToken = req.headers.authorization  ;
 
-    if ( !item )
-    {
-        jwt.verify( accessToken , process.env.accessSecretKey , function(err, decoded) 
+        const item = await BlackListModel.findOne( { "token" : accessToken } )  ;
+
+        if ( !item )
         {
-            if ( !err )
+            jwt.verify( accessToken , process.env.accessSecretKey , function(err, decoded) 
             {
-                req.body.email = decoded.email  ;
+                if ( !err )
+                {
+                    req.body.email = decoded.email  ;
 
-                next()  ;
-            }
-            else
-            {
-                res.send( { "error" : err } )  ;
-            }
-        });
+                    next()  ;
+                }
+                else
+                {
+                    res.send( { "error" : err } )  ;
+                }
+            });
+        }
+        else
+        {
+            res.send( { "msg" : "Your are not logged in" } )  ;
+        }      
+        
+    } catch (error) {
+        res.send( { "error" : error } )  ;
     }
-    else
-    {
-        res.send( { "msg" : "Your are not logged in" } )  ;
-    }      
 } 
 
 module.exports = { auth }  ;

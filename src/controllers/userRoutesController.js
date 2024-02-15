@@ -111,23 +111,26 @@ const logoutUser = async ( req , res ) => {
 
 const refreshToken = async ( req , res ) => {
 
-    const refreshToken = req.headers.authorization  ;
-
-    const item = await BlackListModel.findOne( { "token" : refreshToken } )  ;
-
     try {
+
+        const refreshToken = req.headers.authorization  ;
+
+        const item = await BlackListModel.findOne( { "token" : refreshToken } )  ;
 
         if ( !item )
         {
-            jwt.verify( refreshToken , process.env.refreshSecretKey , ( err , decoded ) => {
-            
-                if ( err ) {
-                    return res.send( { "error" : err } )  ;
-                }
-            
-                const newaccessToken = jwt.sign( { email } , process.env.accessSecretKey , { expiresIn: '30m' } )   ;
+            jwt.verify( refreshToken , process.env.refreshSecretKey , function(err, decoded) 
+            {
+                if ( !err )
+                {
+                    const newaccessToken = jwt.sign( { 'email' : decoded.email } , process.env.accessSecretKey , { expiresIn: '30m' } )   ;
     
-                res.status(200).send({ "newaccessToken" : newaccessToken })  ;
+                    res.status(200).send({ "newaccessToken" : newaccessToken })  ;
+                }
+                else
+                {
+                    res.send( { "error" : err } )  ;
+                }
             });
         }
         else
