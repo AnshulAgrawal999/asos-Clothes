@@ -15,7 +15,7 @@ womenRouter.get( '/' , auth , async ( req , res ) => {
 
         const products = await ProductModel.find( )  ;
 
-        res.status(200).send( posts )  ;
+        res.status(200).send( products )  ;
 
     } catch (error) {
         res.status(400).send( {error} )  ;
