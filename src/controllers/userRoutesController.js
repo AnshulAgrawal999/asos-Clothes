@@ -1,14 +1,17 @@
-const { UserModel } = require( '../models/userModel' )  ;
-
 const bcrypt = require( 'bcrypt' ) ;
 
 const jwt  = require( 'jsonwebtoken' )  ;
 
-const { BlackListModel } = require( '../models/blackListModel' )  ;
-
 const dotenv = require( 'dotenv' )  ;
 
+
+const { UserModel } = require( '../models/userModel' )  ;
+
+const { BlackListModel } = require( '../models/blackListModel' )  ;
+
+
 dotenv.config()  ;
+
 
 const registerUser = async ( req , res ) => {
 

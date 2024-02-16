@@ -1,10 +1,13 @@
 const jwt = require( 'jsonwebtoken' )  ;
 
-const { BlackListModel } = require( '../models/blackListModel' )  ;
-
 const dotenv = require( 'dotenv' )  ;
 
+
+const { BlackListModel } = require( '../models/blackListModel' )  ;
+
+
 dotenv.config()  ;
+
 
 const auth = async ( req , res , next ) => {
 
@@ -39,5 +42,6 @@ const auth = async ( req , res , next ) => {
         res.send( { "error" : error } )  ;
     }
 } 
+
 
 module.exports = { auth }  ;

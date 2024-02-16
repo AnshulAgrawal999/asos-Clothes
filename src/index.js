@@ -1,26 +1,34 @@
 const express = require( 'express' )  ;
 
-const { connection } = require( './configs/db' )  ;
-
-const port = process.env.port  ;
+const cors = require( 'cors' )  ;
 
 const dotenv = require( 'dotenv' )  ;
+
+
+const { connection } = require( './configs/db' )  ;
 
 const { userRouter } = require( './routes/userRoutes' )  ;
 
 const { auth } = require( './controllers/auth' )  ;
 
-const cors = require( 'cors' )  ;
+const { adminRouter } = require( './routes/adminRoutes' )  ;
+
+
+dotenv.config() ;
+
+const port = process.env.port  ;
 
 const app = express()  ;
 
-dotenv.config() ;
 
 app.use( cors() )  ;
 
 app.use( express.json() )  ;
 
 app.use( '/users' , userRouter )  ;
+
+app.use( '/admin' , adminRouter )  ;
+
 
 
 app.get( '/' , ( req , res ) => {
