@@ -1,6 +1,6 @@
 const jwt = require( 'jsonwebtoken' )  ;
 
-const { BlackListModel } = require( '../models/blackList' )  ;
+const { BlackListModel } = require( '../models/blackListModel' )  ;
 
 const dotenv = require( 'dotenv' )  ;
 
