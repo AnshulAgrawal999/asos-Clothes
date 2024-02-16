@@ -7,8 +7,7 @@ const userSchema = mongoose.Schema(
     lastname : { type : String , required : true },
     email : { type: String , required : true },
     DOB : { type: String , required : true },
-    password : { type : String , required : true },
-    intrestedin : { type : Boolean , required : true }
+    password : { type : String , required : true }
 },
 {
     versionKey : false
