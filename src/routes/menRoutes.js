@@ -3,13 +3,23 @@ const express = require( 'express' )  ;
 
 const { auth } = require( '../controllers/auth' )  ;
 
+const { ProductModel } = require( '../models/productModel' )  ;
+
 
 const menRouter = express.Router()  ;
 
 
-menRouter.get( '/' , auth , ( req , res ) => {
+menRouter.get( '/' , auth , async ( req , res ) => {
 
-    res.send( { 'msg' : 'this is the men page' } )  ;
+    try {
+
+        const products = await ProductModel.find( )  ;
+
+        res.status(200).send( posts )  ;
+
+    } catch (error) {
+        res.status(400).send( {error} )  ;
+    } 
     
 } )  ;
 
