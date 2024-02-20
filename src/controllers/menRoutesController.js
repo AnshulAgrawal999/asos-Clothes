@@ -4,7 +4,7 @@ const getMenProducts = async ( req , res ) => {
 
     try {
 
-        const products = await ProductModel.find( )  ;
+        const products = await ProductModel.find( { 'category' : 'men' } )  ;
 
         res.status(200).send( products )  ;
 
