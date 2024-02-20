@@ -6,14 +6,21 @@ dotenv.config() ;
 
 const loginAdmin = ( req , res )=>{
 
-    res.send( { 'msg' : 'login successfull' } )  ;
-   
+    const { email , password } = req.body  ;
+
+    if( process.env.adminEmail === email && process.env.adminPassword === password )
+    {
+        res.send( { 'msg' : 'login successfull' } )  ;
+    }
+    else
+    {
+        res.send( { 'msg' : 'Incorrect email or password' } )  ;
+    }
 } 
 
 const logoutAdmin = ( req , res ) => {
 
-    res.send( { 'msg' : 'logout successfull'} )  ;
-    
+    res.send( { 'msg' : 'logout successfull' } )  ;
 } 
 
 

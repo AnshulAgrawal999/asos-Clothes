@@ -9,7 +9,7 @@ const adminRouter = express.Router()  ;
 
 adminRouter.post( '/login' , loginAdmin )  ;
 
-adminRouter.get( '/logout' , logoutAdmin )  ;
+adminRouter.post( '/logout' , logoutAdmin )  ;
 
 
 module.exports = { adminRouter }  ;
