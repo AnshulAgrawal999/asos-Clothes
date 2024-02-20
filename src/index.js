@@ -15,6 +15,8 @@ const { menRouter }  = require( './routes/menRoutes' )  ;
 
 const { womenRouter }  = require( './routes/womenRoutes' )  ;
 
+const { cartRouter }  = require( './routes/cartRoutes' )  ;
+
 
 
 dotenv.config() ;
@@ -37,10 +39,12 @@ app.use( '/men' , menRouter )  ;
 
 app.use( '/women' , womenRouter )  ;
 
+app.use( '/cart' , cartRouter )  ;
+
 
 app.get( '/' , ( req , res ) => {
 
-    res.send( { 'msg' : 'this is the asos home page' } )  ;
+    res.send( { 'msg' : 'this is the asos clothing home page' } )  ;
     
 } )  ;
 

@@ -13,6 +13,7 @@ const { BlackListModel } = require( '../models/blackListModel' )  ;
 dotenv.config()  ;
 
 
+
 const registerUser = async ( req , res ) => {
 
     try {
@@ -145,9 +146,6 @@ const refreshToken = async ( req , res ) => {
         res.status(400).send( { "error" : error } )  ;
     }
 }
-
-
-
 
 
 module.exports = { registerUser , loginUser , logoutUser , refreshToken }  ;
