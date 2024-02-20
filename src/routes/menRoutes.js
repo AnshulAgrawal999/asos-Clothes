@@ -1,7 +1,6 @@
 const express = require( 'express' )  ;
 
 
-const { auth } = require( '../controllers/auth' )  ;
 
 const { getMenProducts } = require( '../controllers/menRoutesController' )  ;
 
@@ -9,7 +8,7 @@ const { getMenProducts } = require( '../controllers/menRoutesController' )  ;
 const menRouter = express.Router()  ;
 
 
-menRouter.get( '/' , auth , getMenProducts )  ;
+menRouter.get( '/' , getMenProducts )  ;
 
 
 module.exports = { menRouter }  ;
