@@ -1,7 +1,5 @@
 # asos-Clothes
 
-## Introduction
-
 ## Overview
 ASOS Clothes Clone is a full-stack project that aims to provide a seamless and user-friendly experience for online shopping. This project is inspired by the ASOS online store and attempts to replicate its functionality and design.
 
@@ -19,3 +17,5 @@ ASOS Clothes Clone is a full-stack project that aims to provide a seamless and u
 - Frontend: The frontend of the ASOS Clothing project is built using React.js and Vite.
 - Backend: Node.js, Express.js
 - Database: MongoDB
+
+## Frontend repo link - https://github.com/AnshulAgrawal999/frontend-Asos-Clothing 
