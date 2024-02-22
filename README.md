@@ -16,6 +16,6 @@ ASOS Clothes Clone is a full-stack project that aims to provide a seamless and u
 4. Search and Filtering: Implemented search functionality allowing users to find products based on various criteria such as category, size, color, and price range. Provided filtering options to refine search results for a more personalized shopping experience. Users can search for specific items and filter the results based on categories like size, color, brand, and price range.
 
 ## Technologies Used
--Frontend: The frontend of the ASOS Clothing project is built using React.js and Vite.
--Backend: Node.js, Express.js
--Database: MongoDB
+- Frontend: The frontend of the ASOS Clothing project is built using React.js and Vite.
+- Backend: Node.js, Express.js
+- Database: MongoDB
