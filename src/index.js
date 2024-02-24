@@ -44,7 +44,7 @@ app.use( '/cart' , cartRouter )  ;
 
 app.get( '/' , ( req , res ) => {
 
-    res.send( { 'msg' : 'this is the asos clothing home page' } )  ;
+    res.send( { 'msg' : 'this is the Asos Cloths home page' } )  ;
     
 } )  ;
 
