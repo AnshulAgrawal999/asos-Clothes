@@ -21,7 +21,7 @@ const { cartRouter }  = require( './routes/cartRoutes' )  ;
 
 dotenv.config() ;
 
-const PORT = process.env.port  ;
+const PORT = process.env.PORT  ;
 
 const app = express()  ;
 
