@@ -21,7 +21,7 @@ const { cartRouter }  = require( './routes/cartRoutes' )  ;
 
 dotenv.config() ;
 
-const port = process.env.port  ;
+const PORT = process.env.port  ;
 
 const app = express()  ;
 
@@ -49,9 +49,9 @@ app.get( '/' , ( req , res ) => {
 } )  ;
 
 
-app.listen( port , async ()=>{
+app.listen( PORT , async ()=>{
     try {
-        console.log( `server is running on http://localhost:${port}` )  ;
+        console.log( `server is running on http://localhost:${PORT}` )  ;
         
         await connection  ;
 
